@@ -32,8 +32,10 @@ import {
   Email as EmailIcon,
   Phone as PhoneIcon,
   LocationOn as LocationIcon,
+  Person as PersonIcon,
 } from "@mui/icons-material";
 import { useTheme as useAppTheme } from "../context/ThemeContext";
+import { useAuth } from "../context/AuthContext";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -41,6 +43,18 @@ interface LayoutProps {
 
 interface HideOnScrollProps {
   children: React.ReactElement;
+}
+
+interface NavigationItem {
+  label: string;
+  path: string;
+}
+
+interface AuthItem {
+  label: string;
+  path?: string;
+  onClick?: () => void;
+  icon?: React.ReactNode;
 }
 
 function HideOnScroll(props: HideOnScrollProps) {
@@ -61,14 +75,35 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useAppTheme();
+  const { isAuthenticated, user, logout } = useAuth();
 
-  const navigationItems = [
+  const navigationItems: NavigationItem[] = [
     { label: "Home", path: "/" },
     { label: "Hidden Gems", path: "/hidden-gems" },
     { label: "Upcoming", path: "/upcoming" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
   ];
+
+  const authItems: AuthItem[] = isAuthenticated
+    ? [
+        {
+          label: "Profile",
+          path: "/profile",
+          icon: <PersonIcon sx={{ mr: 1 }} />,
+        },
+        {
+          label: "Logout",
+          onClick: () => {
+            logout();
+            navigate("/");
+          },
+        },
+      ]
+    : [
+        { label: "Login", path: "/login" },
+        { label: "Register", path: "/register" },
+      ];
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -85,6 +120,31 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <ListItem
             key={item.label}
             onClick={() => navigate(item.path)}
+            sx={{
+              backgroundColor:
+                location.pathname === item.path
+                  ? theme.palette.primary.main
+                  : "transparent",
+              color:
+                location.pathname === item.path
+                  ? theme.palette.primary.contrastText
+                  : "inherit",
+              "&:hover": {
+                backgroundColor: theme.palette.primary.light,
+                color: theme.palette.primary.contrastText,
+              },
+            }}
+          >
+            <ListItemText primary={item.label} />
+          </ListItem>
+        ))}
+        <Divider sx={{ my: 1 }} />
+        {authItems.map((item) => (
+          <ListItem
+            key={item.label}
+            onClick={() =>
+              item.onClick ? item.onClick() : item.path && navigate(item.path)
+            }
             sx={{
               backgroundColor:
                 location.pathname === item.path
@@ -143,6 +203,30 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     <Button
                       key={item.label}
                       onClick={() => navigate(item.path)}
+                      sx={{
+                        color:
+                          location.pathname === item.path
+                            ? theme.palette.primary.main
+                            : "inherit",
+                        fontWeight: location.pathname === item.path ? 600 : 400,
+                        "&:hover": {
+                          backgroundColor: "transparent",
+                          color: theme.palette.primary.main,
+                        },
+                      }}
+                    >
+                      {item.label}
+                    </Button>
+                  ))}
+                  {authItems.map((item) => (
+                    <Button
+                      key={item.label}
+                      onClick={() =>
+                        item.onClick
+                          ? item.onClick()
+                          : item.path && navigate(item.path)
+                      }
+                      startIcon={item.icon}
                       sx={{
                         color:
                           location.pathname === item.path

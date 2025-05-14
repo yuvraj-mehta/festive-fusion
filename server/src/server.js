@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/festive-f
 
 // Routes
 app.use('/api/festivals', require('./routes/festivalRoutes'));
-app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/auth', require('./routes/userRoutes'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
