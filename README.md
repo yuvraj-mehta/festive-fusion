@@ -54,7 +54,7 @@ FestiveFusion is a comprehensive platform dedicated to celebrating and preservin
 
    ```bash
    # In the server directory, create a .env file:
-   PORT=5000
+   PORT=5001
    MONGODB_URI=your_mongodb_uri
    JWT_SECRET=your_jwt_secret
    ```

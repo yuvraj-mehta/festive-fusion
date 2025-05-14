@@ -10,8 +10,17 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 // Create Express app
 const app = express();
 
+// CORS configuration
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // MongoDB Connection
@@ -22,6 +31,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/festive-f
 // Routes
 app.use('/api/festivals', require('./routes/festivalRoutes'));
 app.use('/api/auth', require('./routes/userRoutes'));
+app.use('/api/planned-visits', require('./routes/plannedVisitRoutes'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

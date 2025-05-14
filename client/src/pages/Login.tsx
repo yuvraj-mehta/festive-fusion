@@ -104,14 +104,18 @@ const Login: React.FC = () => {
               >
                 Login
               </Button>
-              <Box sx={{ textAlign: "center" }}>
-                <Link
-                  component="button"
-                  variant="body2"
+              <Box sx={{ textAlign: "center", mt: 2 }}>
+                <Typography variant="body1" gutterBottom>
+                  Don't have an account?
+                </Typography>
+                <Button
+                  variant="outlined"
+                  fullWidth
                   onClick={() => navigate("/register")}
+                  sx={{ mt: 1 }}
                 >
-                  Don't have an account? Sign Up
-                </Link>
+                  Create Account
+                </Button>
               </Box>
             </form>
           </Paper>

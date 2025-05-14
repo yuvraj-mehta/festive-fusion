@@ -13,56 +13,279 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
+import { Festival } from "../types";
 
 // Sample festival data
-const featuredFestivals = [
+const featuredFestivals: Festival[] = [
   {
     id: 1,
-    title: "Diwali",
-    description: "The Festival of Lights",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    date: "November 12, 2024",
-    location: "Pan India",
+    name: "Diwali Festival",
+    description:
+      "The festival of lights celebrating the victory of light over darkness",
+    region: "Pan India",
+    type: "religious",
+    startDate: "2024-11-01",
+    endDate: "2024-11-05",
+    location: {
+      city: "Delhi",
+      state: "Delhi",
+      coordinates: {
+        latitude: 28.6139,
+        longitude: 77.209,
+      },
+    },
+    images: [
+      {
+        url: "/images/diwali.jpg",
+        caption: "Diwali celebrations",
+      },
+    ],
+    culturalSignificance: "One of the most important festivals in Hinduism",
+    touristInfo: {
+      crowdLevel: "high",
+      budgetLevel: "moderate",
+      bestTimeToVisit: "November",
+      accessibility: "Easily accessible",
+    },
+    localExperiences: [
+      {
+        name: "Rangoli Making",
+        description: "Traditional floor art with colored powder",
+        type: "cultural-activity",
+      },
+      {
+        name: "Diya Lighting",
+        description: "Lighting of traditional oil lamps",
+        type: "cultural-activity",
+      },
+    ],
+    weatherConditions: {
+      temperature: {
+        min: 15,
+        max: 28,
+      },
+      rainfall: 0,
+      humidity: 45,
+    },
+    isHiddenGem: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 2,
-    title: "Holi",
+    name: "Holi",
     description: "The Festival of Colors",
-    image:
-      "https://images.unsplash.com/photo-1615485500704-8e990f7701e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    date: "March 25, 2024",
-    location: "Pan India",
+    region: "Pan India",
+    type: "religious",
+    startDate: "2024-03-25",
+    endDate: "2024-03-26",
+    location: {
+      city: "Mathura",
+      state: "Uttar Pradesh",
+      coordinates: {
+        latitude: 27.4924,
+        longitude: 77.6737,
+      },
+    },
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1615485500704-8e990f7701e3",
+        caption: "Holi celebrations",
+      },
+    ],
+    culturalSignificance:
+      "Celebrates the arrival of spring and victory of good over evil",
+    touristInfo: {
+      crowdLevel: "high",
+      budgetLevel: "budget",
+      bestTimeToVisit: "March",
+      accessibility: "Easily accessible",
+    },
+    localExperiences: [
+      {
+        name: "Color Play",
+        description: "Traditional playing with colors",
+        type: "cultural-activity",
+      },
+      {
+        name: "Folk Music",
+        description: "Traditional Holi songs and dances",
+        type: "performance-art",
+      },
+    ],
+    weatherConditions: {
+      temperature: {
+        min: 20,
+        max: 32,
+      },
+      rainfall: 0,
+      humidity: 40,
+    },
+    isHiddenGem: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 3,
-    title: "Durga Puja",
+    name: "Durga Puja",
     description: "Celebration of Divine Feminine",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    date: "October 20-24, 2024",
-    location: "West Bengal",
+    region: "West Bengal",
+    type: "religious",
+    startDate: "2024-10-20",
+    endDate: "2024-10-24",
+    location: {
+      city: "Kolkata",
+      state: "West Bengal",
+      coordinates: {
+        latitude: 22.5726,
+        longitude: 88.3639,
+      },
+    },
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944",
+        caption: "Durga Puja celebrations",
+      },
+    ],
+    culturalSignificance: "Celebrates the victory of Goddess Durga over evil",
+    touristInfo: {
+      crowdLevel: "high",
+      budgetLevel: "moderate",
+      bestTimeToVisit: "October",
+      accessibility: "Easily accessible",
+    },
+    localExperiences: [
+      {
+        name: "Pandal Hopping",
+        description: "Visit various themed pandals across the city",
+        type: "cultural-activity",
+      },
+      {
+        name: "Bengali Cuisine",
+        description: "Traditional Bengali festival food",
+        type: "culinary-experience",
+      },
+    ],
+    weatherConditions: {
+      temperature: {
+        min: 25,
+        max: 32,
+      },
+      rainfall: 5,
+      humidity: 75,
+    },
+    isHiddenGem: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 ];
 
-const upcomingFestivals = [
+const upcomingFestivals: Festival[] = [
   {
     id: 4,
-    title: "Ganesh Chaturthi",
+    name: "Ganesh Chaturthi",
     description: "Celebration of Lord Ganesha",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    date: "September 7, 2024",
-    location: "Maharashtra",
+    region: "Maharashtra",
+    type: "religious",
+    startDate: "2024-09-07",
+    endDate: "2024-09-13",
+    location: {
+      city: "Mumbai",
+      state: "Maharashtra",
+      coordinates: {
+        latitude: 19.076,
+        longitude: 72.8777,
+      },
+    },
+    images: [
+      {
+        url: "/images/ganesh.jpg",
+        caption: "Ganesh Chaturthi celebrations",
+      },
+    ],
+    culturalSignificance: "Celebrates the birth of Lord Ganesha",
+    touristInfo: {
+      crowdLevel: "high",
+      budgetLevel: "moderate",
+      bestTimeToVisit: "September",
+      accessibility: "Moderate",
+    },
+    localExperiences: [
+      {
+        name: "Bhog",
+        description: "Feast offered to Lord Ganesha",
+        type: "culinary-experience",
+      },
+      {
+        name: "Roli Choli",
+        description: "Traditional dance performed during Ganesh Chaturthi",
+        type: "performance-art",
+      },
+    ],
+    weatherConditions: {
+      temperature: {
+        min: 20,
+        max: 32,
+      },
+      rainfall: 0,
+      humidity: 40,
+    },
+    isHiddenGem: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 5,
-    title: "Pongal",
+    name: "Pongal",
     description: "Harvest Festival of South India",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    date: "January 15, 2024",
-    location: "Tamil Nadu",
+    region: "Tamil Nadu",
+    type: "seasonal",
+    startDate: "2024-01-15",
+    endDate: "2024-01-17",
+    location: {
+      city: "Tanjavur",
+      state: "Tamil Nadu",
+      coordinates: {
+        latitude: 10.7956,
+        longitude: 79.1322,
+      },
+    },
+    images: [
+      {
+        url: "/images/pongal.jpg",
+        caption: "Pongal celebrations",
+      },
+    ],
+    culturalSignificance: "Celebrates the harvest season",
+    touristInfo: {
+      crowdLevel: "medium",
+      budgetLevel: "budget",
+      bestTimeToVisit: "January",
+      accessibility: "Moderate",
+    },
+    localExperiences: [
+      {
+        name: "Kolam",
+        description: "Decorative rangoli made with rice flour",
+        type: "cultural-activity",
+      },
+      {
+        name: "Pongal",
+        description: "Traditional sweet made from rice and jaggery",
+        type: "culinary-experience",
+      },
+    ],
+    weatherConditions: {
+      temperature: {
+        min: 20,
+        max: 30,
+      },
+      rainfall: 0,
+      humidity: 45,
+    },
+    isHiddenGem: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 ];
 
@@ -126,7 +349,7 @@ const Home: React.FC = () => {
                 variant="contained"
                 color="primary"
                 size="large"
-                onClick={() => navigate("/upcoming")}
+                onClick={() => navigate("/upcoming-festivals")}
                 sx={{
                   px: 4,
                   py: 1.5,
@@ -178,8 +401,8 @@ const Home: React.FC = () => {
                 <CardMedia
                   component="img"
                   height="240"
-                  image={festival.image}
-                  alt={festival.title}
+                  image={festival.images[0].url}
+                  alt={festival.name}
                   sx={{
                     objectFit: "cover",
                   }}
@@ -191,7 +414,7 @@ const Home: React.FC = () => {
                     component="h3"
                     sx={{ fontWeight: 600 }}
                   >
-                    {festival.title}
+                    {festival.name}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -201,10 +424,10 @@ const Home: React.FC = () => {
                     {festival.description}
                   </Typography>
                   <Typography variant="body2" color="primary" sx={{ mb: 1 }}>
-                    📅 {festival.date}
+                    📅 {`${festival.startDate} - ${festival.endDate}`}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    📍 {festival.location}
+                    📍 {`${festival.location.city}, ${festival.location.state}`}
                   </Typography>
                 </CardContent>
               </Card>
@@ -249,8 +472,8 @@ const Home: React.FC = () => {
                       width: { xs: "100%", md: 200 },
                       height: { xs: 200, md: "auto" },
                     }}
-                    image={festival.image}
-                    alt={festival.title}
+                    image={festival.images[0].url}
+                    alt={festival.name}
                   />
                   <CardContent sx={{ flex: 1 }}>
                     <Typography
@@ -259,7 +482,7 @@ const Home: React.FC = () => {
                       component="h3"
                       sx={{ fontWeight: 600 }}
                     >
-                      {festival.title}
+                      {festival.name}
                     </Typography>
                     <Typography
                       variant="body1"
@@ -269,10 +492,11 @@ const Home: React.FC = () => {
                       {festival.description}
                     </Typography>
                     <Typography variant="body2" color="primary" sx={{ mb: 1 }}>
-                      📅 {festival.date}
+                      📅 {`${festival.startDate} - ${festival.endDate}`}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      📍 {festival.location}
+                      📍{" "}
+                      {`${festival.location.city}, ${festival.location.state}`}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -333,7 +557,7 @@ const Home: React.FC = () => {
               variant="outlined"
               color="inherit"
               size="large"
-              onClick={() => navigate("/upcoming")}
+              onClick={() => navigate("/upcoming-festivals")}
               sx={{
                 px: 4,
                 py: 1.5,

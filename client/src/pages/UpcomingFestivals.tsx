@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -11,6 +12,7 @@ import {
   Chip,
   useTheme,
   Paper,
+  CircularProgress,
 } from "@mui/material";
 import {
   CalendarMonth as CalendarIcon,
@@ -18,69 +20,54 @@ import {
   AccessTime as TimeIcon,
 } from "@mui/icons-material";
 import Layout from "../components/Layout";
-
-// Sample upcoming festivals data
-const upcomingFestivals = [
-  {
-    id: 1,
-    title: "Ganesh Chaturthi",
-    description:
-      "A grand celebration of Lord Ganesha's birth, featuring elaborate processions, cultural performances, and community celebrations.",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    date: "September 7, 2024",
-    location: "Maharashtra",
-    duration: "10 days",
-    category: "Religious",
-    highlights: [
-      "Ganesh Visarjan",
-      "Cultural Programs",
-      "Community Celebrations",
-    ],
-  },
-  {
-    id: 2,
-    title: "Pongal",
-    description:
-      "A harvest festival celebrated in Tamil Nadu, marking the beginning of the sun's northward journey and the end of winter.",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    date: "January 15, 2024",
-    location: "Tamil Nadu",
-    duration: "4 days",
-    category: "Harvest",
-    highlights: ["Traditional Cooking", "Cattle Worship", "Cultural Events"],
-  },
-  {
-    id: 3,
-    title: "Hornbill Festival",
-    description:
-      "A celebration of Naga culture and traditions, featuring tribal dances, music, and traditional games.",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    date: "December 1-10, 2024",
-    location: "Nagaland",
-    duration: "10 days",
-    category: "Cultural",
-    highlights: ["Tribal Dances", "Traditional Music", "Food Festival"],
-  },
-  {
-    id: 4,
-    title: "Kumbh Mela",
-    description:
-      "One of the world's largest religious gatherings, where millions of devotees gather to take a holy dip in sacred rivers.",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    date: "January 15 - March 4, 2025",
-    location: "Prayagraj, Uttar Pradesh",
-    duration: "49 days",
-    category: "Religious",
-    highlights: ["Holy Dip", "Spiritual Discourses", "Cultural Programs"],
-  },
-];
+import { Festival } from "../types";
+import { festivalsApi } from "../services/api";
 
 const UpcomingFestivals: React.FC = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const [festivals, setFestivals] = useState<Festival[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadFestivals = async () => {
+      try {
+        setLoading(true);
+        const data = await festivalsApi.getUpcoming();
+        setFestivals(data);
+      } catch (err) {
+        setError("Failed to load upcoming festivals");
+        console.error("Error loading festivals:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadFestivals();
+  }, []);
+
+  if (loading) {
+    return (
+      <Layout>
+        <Container sx={{ py: 8, textAlign: "center" }}>
+          <CircularProgress />
+        </Container>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <Container sx={{ py: 8 }}>
+          <Typography color="error" variant="h6">
+            {error}
+          </Typography>
+        </Container>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -156,7 +143,7 @@ const UpcomingFestivals: React.FC = () => {
           Featured Upcoming Festivals
         </Typography>
         <Grid container spacing={4}>
-          {upcomingFestivals.map((festival) => (
+          {festivals.map((festival) => (
             <Grid item xs={12} md={6} key={festival.id}>
               <Card
                 sx={{
@@ -164,10 +151,12 @@ const UpcomingFestivals: React.FC = () => {
                   display: "flex",
                   flexDirection: { xs: "column", md: "row" },
                   transition: "transform 0.3s ease",
+                  cursor: "pointer",
                   "&:hover": {
                     transform: "translateY(-8px)",
                   },
                 }}
+                onClick={() => navigate(`/festival/${festival.id}`)}
               >
                 <CardMedia
                   component="img"
@@ -175,12 +164,12 @@ const UpcomingFestivals: React.FC = () => {
                     width: { xs: "100%", md: 200 },
                     height: { xs: 200, md: "auto" },
                   }}
-                  image={festival.image}
-                  alt={festival.title}
+                  image={festival.images[0].url}
+                  alt={festival.name}
                 />
                 <CardContent sx={{ flex: 1 }}>
                   <Typography variant="h5" gutterBottom color="primary">
-                    {festival.title}
+                    {festival.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" paragraph>
                     {festival.description}
@@ -188,26 +177,26 @@ const UpcomingFestivals: React.FC = () => {
                   <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                     <CalendarIcon sx={{ mr: 1, color: "text.secondary" }} />
                     <Typography variant="body2" color="text.secondary">
-                      {festival.date}
+                      {`${festival.startDate} - ${festival.endDate}`}
                     </Typography>
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                     <LocationIcon sx={{ mr: 1, color: "text.secondary" }} />
                     <Typography variant="body2" color="text.secondary">
-                      {festival.location}
+                      {`${festival.location.city}, ${festival.location.state}`}
                     </Typography>
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
                     <TimeIcon sx={{ mr: 1, color: "text.secondary" }} />
                     <Typography variant="body2" color="text.secondary">
-                      Duration: {festival.duration}
+                      Best Time: {festival.touristInfo.bestTimeToVisit}
                     </Typography>
                   </Box>
                   <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                    {festival.highlights.map((highlight, index) => (
+                    {festival.localExperiences.map((experience, index) => (
                       <Chip
                         key={index}
-                        label={highlight}
+                        label={experience.name}
                         size="small"
                         color="primary"
                         variant="outlined"

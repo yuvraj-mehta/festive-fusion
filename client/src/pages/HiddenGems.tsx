@@ -27,143 +27,264 @@ import {
   AccessTime as TimeIcon,
 } from "@mui/icons-material";
 import Layout from "../components/Layout";
+import PlanVisitModal from "../components/PlanVisitModal";
+import { Festival } from "../types";
 
 // Sample hidden gems data
-const hiddenGems = [
+const hiddenGems: Festival[] = [
   {
     id: 1,
-    title: "Hornbill Festival",
+    name: "Hornbill Festival",
     description:
       "A lesser-known celebration of Naga culture in Nagaland, featuring tribal dances, music, and traditional games. This festival showcases the rich heritage of 16 major Naga tribes.",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    location: "Kisama, Nagaland",
-    timing: "December 1-10",
-    category: "Tribal",
-    uniqueFeatures: [
-      "Tribal Dances",
-      "Traditional Music",
-      "Food Festival",
-      "Cultural Shows",
+    region: "Nagaland",
+    type: "tribal",
+    startDate: "2024-12-01",
+    endDate: "2024-12-10",
+    location: {
+      city: "Kisama",
+      state: "Nagaland",
+      coordinates: {
+        latitude: 25.6568,
+        longitude: 94.1053,
+      },
+    },
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944",
+        caption: "Hornbill Festival celebration",
+      },
     ],
-    bestTimeToVisit: "December",
     culturalSignificance: "Celebrates the cultural heritage of Naga tribes",
+    touristInfo: {
+      crowdLevel: "medium",
+      budgetLevel: "moderate",
+      bestTimeToVisit: "December",
+      accessibility: "Moderate - requires some travel planning",
+    },
+    localExperiences: [
+      {
+        name: "Tribal Dances",
+        description: "Traditional tribal dance performances",
+        type: "cultural-activity",
+      },
+      {
+        name: "Food Festival",
+        description: "Traditional Naga cuisine tasting",
+        type: "culinary-experience",
+      },
+    ],
+    weatherConditions: {
+      temperature: {
+        min: 15,
+        max: 25,
+      },
+      rainfall: 10,
+      humidity: 65,
+    },
+    isHiddenGem: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 2,
-    title: "Ziro Festival of Music",
+    name: "Ziro Festival of Music",
     description:
       "An independent music festival set in the picturesque Ziro Valley of Arunachal Pradesh. It's a unique blend of contemporary music and tribal culture.",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    location: "Ziro Valley, Arunachal Pradesh",
-    timing: "September",
-    category: "Music",
-    uniqueFeatures: [
-      "Live Music",
-      "Local Food",
-      "Camping",
-      "Cultural Exchange",
+    region: "Arunachal Pradesh",
+    type: "tribal",
+    startDate: "2024-09-15",
+    endDate: "2024-09-18",
+    location: {
+      city: "Ziro Valley",
+      state: "Arunachal Pradesh",
+      coordinates: {
+        latitude: 27.533,
+        longitude: 93.832,
+      },
+    },
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944",
+        caption: "Ziro Music Festival",
+      },
     ],
-    bestTimeToVisit: "September",
     culturalSignificance: "Promotes independent music and tribal culture",
+    touristInfo: {
+      crowdLevel: "medium",
+      budgetLevel: "moderate",
+      bestTimeToVisit: "September",
+      accessibility: "Moderate - requires travel planning",
+    },
+    localExperiences: [
+      {
+        name: "Live Music",
+        description: "Contemporary and traditional music performances",
+        type: "performance-art",
+      },
+      {
+        name: "Local Food",
+        description: "Traditional Arunachali cuisine",
+        type: "culinary-experience",
+      },
+      {
+        name: "Camping",
+        description: "Stay in traditional bamboo huts",
+        type: "accommodation-experience",
+      },
+    ],
+    weatherConditions: {
+      temperature: {
+        min: 18,
+        max: 28,
+      },
+      rainfall: 15,
+      humidity: 70,
+    },
+    isHiddenGem: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 3,
-    title: "Sindhu Darshan Festival",
+    name: "Sindhu Darshan Festival",
     description:
       "A unique festival in Ladakh that celebrates the River Indus (Sindhu) and promotes national integration. The festival features cultural performances and a symbolic offering of water from different rivers of India.",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    location: "Leh, Ladakh",
-    timing: "June",
-    category: "Cultural",
-    uniqueFeatures: [
-      "River Ceremony",
-      "Cultural Shows",
-      "Traditional Music",
-      "Local Food",
+    region: "Ladakh",
+    type: "religious",
+    startDate: "2024-06-12",
+    endDate: "2024-06-14",
+    location: {
+      city: "Leh",
+      state: "Ladakh",
+      coordinates: {
+        latitude: 34.1526,
+        longitude: 77.5771,
+      },
+    },
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944",
+        caption: "Sindhu Darshan Festival",
+      },
     ],
-    bestTimeToVisit: "June",
     culturalSignificance:
       "Celebrates the River Indus and promotes national integration",
+    touristInfo: {
+      crowdLevel: "medium",
+      budgetLevel: "moderate",
+      bestTimeToVisit: "June",
+      accessibility: "Challenging - high altitude location",
+    },
+    localExperiences: [
+      {
+        name: "River Ceremony",
+        description: "Traditional water offering ceremony",
+        type: "religious-ritual",
+      },
+      {
+        name: "Cultural Shows",
+        description: "Traditional Ladakhi performances",
+        type: "performance-art",
+      },
+    ],
+    weatherConditions: {
+      temperature: {
+        min: 10,
+        max: 25,
+      },
+      rainfall: 5,
+      humidity: 40,
+    },
+    isHiddenGem: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 4,
-    title: "Chapchar Kut",
+    name: "Chapchar Kut",
     description:
       "A spring festival of the Mizo people in Mizoram, celebrating the completion of jhum (shifting cultivation) and the beginning of a new agricultural cycle.",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    location: "Aizawl, Mizoram",
-    timing: "March",
-    category: "Harvest",
-    uniqueFeatures: [
-      "Traditional Dances",
-      "Bamboo Dance",
-      "Local Cuisine",
-      "Cultural Shows",
+    region: "Mizoram",
+    type: "harvest",
+    startDate: "2024-03-01",
+    endDate: "2024-03-02",
+    location: {
+      city: "Aizawl",
+      state: "Mizoram",
+      coordinates: {
+        latitude: 23.7307,
+        longitude: 92.7173,
+      },
+    },
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944",
+        caption: "Chapchar Kut celebrations",
+      },
     ],
-    bestTimeToVisit: "March",
     culturalSignificance: "Celebrates the beginning of the agricultural season",
+    touristInfo: {
+      crowdLevel: "high",
+      budgetLevel: "budget",
+      bestTimeToVisit: "March",
+      accessibility: "Moderate - hilly terrain",
+    },
+    localExperiences: [
+      {
+        name: "Traditional Dances",
+        description: "Cheraw and other traditional dances",
+        type: "performance-art",
+      },
+      {
+        name: "Local Cuisine",
+        description: "Traditional Mizo festival food",
+        type: "culinary-experience",
+      },
+    ],
+    weatherConditions: {
+      temperature: {
+        min: 20,
+        max: 30,
+      },
+      rainfall: 8,
+      humidity: 60,
+    },
+    isHiddenGem: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 ];
 
 const HiddenGems: React.FC = () => {
   const theme = useTheme();
   const [openModal, setOpenModal] = useState(false);
-  const [selectedFestival, setSelectedFestival] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    visitDate: "",
-    groupSize: "",
-    specialRequirements: "",
-  });
+  const [selectedFestival, setSelectedFestival] = useState<Festival | null>(
+    null
+  );
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
     severity: "success" as "success" | "error",
   });
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (festival: Festival) => {
+    setSelectedFestival(festival);
     setOpenModal(true);
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      visitDate: "",
-      groupSize: "",
-      specialRequirements: "",
-    });
-    setSelectedFestival("");
+    setSelectedFestival(null);
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name as string]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically send the data to your backend
+  const handlePlanSuccess = () => {
     setSnackbar({
       open: true,
       message:
-        "Thank you for your interest! We'll contact you shortly with more details.",
+        "Thank you for your interest! Your visit has been planned successfully.",
       severity: "success",
     });
-    handleCloseModal();
   };
 
   const handleCloseSnackbar = () => {
@@ -249,12 +370,12 @@ const HiddenGems: React.FC = () => {
                     width: { xs: "100%", md: 200 },
                     height: { xs: 200, md: "auto" },
                   }}
-                  image={festival.image}
-                  alt={festival.title}
+                  image={festival.images[0].url}
+                  alt={festival.name}
                 />
                 <CardContent sx={{ flex: 1 }}>
                   <Typography variant="h5" gutterBottom color="primary">
-                    {festival.title}
+                    {festival.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" paragraph>
                     {festival.description}
@@ -262,22 +383,22 @@ const HiddenGems: React.FC = () => {
                   <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                     <LocationIcon sx={{ mr: 1, color: "text.secondary" }} />
                     <Typography variant="body2" color="text.secondary">
-                      {festival.location}
+                      {`${festival.location.city}, ${festival.location.state}`}
                     </Typography>
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
                     <TimeIcon sx={{ mr: 1, color: "text.secondary" }} />
                     <Typography variant="body2" color="text.secondary">
-                      Best Time to Visit: {festival.bestTimeToVisit}
+                      Best Time to Visit: {festival.touristInfo.bestTimeToVisit}
                     </Typography>
                   </Box>
                   <Box
                     sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2 }}
                   >
-                    {festival.uniqueFeatures.map((feature, index) => (
+                    {festival.localExperiences.map((experience, index) => (
                       <Chip
                         key={index}
-                        label={feature}
+                        label={experience.name}
                         size="small"
                         color="primary"
                         variant="outlined"
@@ -288,178 +409,28 @@ const HiddenGems: React.FC = () => {
                     <strong>Cultural Significance:</strong>{" "}
                     {festival.culturalSignificance}
                   </Typography>
+                  <Box sx={{ mt: 2 }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleOpenModal(festival)}
+                    >
+                      Plan Your Visit
+                    </Button>
+                  </Box>
                 </CardContent>
               </Card>
             </Grid>
           ))}
         </Grid>
 
-        {/* Call to Action */}
-        <Box
-          sx={{
-            mt: 8,
-            p: 4,
-            textAlign: "center",
-            background: theme.palette.background.paper,
-            borderRadius: 4,
-            boxShadow: 3,
-          }}
-        >
-          <Typography variant="h4" gutterBottom color="primary">
-            Ready to Explore?
-          </Typography>
-          <Typography variant="body1" paragraph>
-            Join us in discovering these hidden gems and experience the
-            authentic cultural heritage of India.
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            sx={{ px: 4, py: 1.5 }}
-            onClick={handleOpenModal}
-          >
-            Plan Your Visit
-          </Button>
-        </Box>
-
-        {/* Plan Your Visit Modal */}
-        <Modal
+        {/* Plan Visit Modal */}
+        <PlanVisitModal
           open={openModal}
           onClose={handleCloseModal}
-          aria-labelledby="plan-visit-modal"
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: { xs: "90%", sm: 500 },
-              bgcolor: "background.paper",
-              borderRadius: 4,
-              boxShadow: 24,
-              p: 4,
-              maxHeight: "90vh",
-              overflow: "auto",
-            }}
-          >
-            <Typography
-              variant="h5"
-              component="h2"
-              gutterBottom
-              color="primary"
-            >
-              Plan Your Visit
-            </Typography>
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <FormControl fullWidth>
-                    <InputLabel id="festival-select-label">
-                      Select Festival
-                    </InputLabel>
-                    <Select
-                      labelId="festival-select-label"
-                      value={selectedFestival}
-                      label="Select Festival"
-                      onChange={(e) => setSelectedFestival(e.target.value)}
-                      required
-                    >
-                      {hiddenGems.map((festival) => (
-                        <MenuItem key={festival.id} value={festival.title}>
-                          {festival.title}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    <FormHelperText>
-                      Choose the festival you'd like to visit
-                    </FormHelperText>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Preferred Visit Date"
-                    name="visitDate"
-                    type="date"
-                    value={formData.visitDate}
-                    onChange={handleChange}
-                    InputLabelProps={{ shrink: true }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Group Size"
-                    name="groupSize"
-                    type="number"
-                    value={formData.groupSize}
-                    onChange={handleChange}
-                    InputProps={{ inputProps: { min: 1 } }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Special Requirements"
-                    name="specialRequirements"
-                    multiline
-                    rows={3}
-                    value={formData.specialRequirements}
-                    onChange={handleChange}
-                    helperText="Any specific requirements or preferences for your visit"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Box
-                    sx={{ display: "flex", gap: 2, justifyContent: "flex-end" }}
-                  >
-                    <Button variant="outlined" onClick={handleCloseModal}>
-                      Cancel
-                    </Button>
-                    <Button type="submit" variant="contained" color="primary">
-                      Submit
-                    </Button>
-                  </Box>
-                </Grid>
-              </Grid>
-            </form>
-          </Box>
-        </Modal>
+          festival={selectedFestival || undefined}
+          onSuccess={handlePlanSuccess}
+        />
 
         <Snackbar
           open={snackbar.open}

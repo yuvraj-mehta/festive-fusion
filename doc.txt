@@ -1,0 +1,176 @@
+✅ Updated & Final Project Roadmap for FestiveFusion
+
+⸻
+
+🧱 Phase 1: Project Setup & Structure
+
+📁 Directory Structure
+
+festivefusion/
+├── client/        # React frontend (TypeScript + MUI)
+├── server/        # Node.js backend (Express + MongoDB)
+├── .env
+└── README.md
+
+
+⸻
+
+🚀 Phase 2: Feature-Driven Backend Development
+
+🛠️ Updated Database Models (MongoDB + Mongoose)
+
+⸻
+
+✅ 1. User Model
+
+{
+  name: String,
+  email: { type: String, unique: true },
+  password: String,
+  socialLogin: { type: Boolean, default: false },
+  preferences: [String], // Festival interests
+  savedFestivals: [ObjectId],
+  visitPlans: [ObjectId], // Reference to VisitPlan
+  role: { type: String, enum: ['user', 'admin'], default: 'user' },
+  createdAt: Date,
+  updatedAt: Date
+}
+
+
+⸻
+
+✅ 2. Festival Model
+
+{
+  name: String,
+  description: String,
+  location: {
+    city: String,
+    state: String,
+    coordinates: {
+      lat: Number,
+      lng: Number
+    }
+  },
+  category: [String], // ['religious', 'cultural', etc.]
+  images: [String],
+  startDate: Date,
+  endDate: Date,
+  culturalSignificance: String,
+  history: String,
+  weatherInfo: String,
+  touristTips: String,
+  popularityScore: Number,
+  isHiddenGem: Boolean,
+  addedBy: ObjectId
+}
+
+
+⸻
+
+✅ 3. VisitPlan Model
+
+{
+  userId: ObjectId,
+  festivalId: ObjectId,
+  dates: {
+    from: Date,
+    to: Date
+  },
+  groupSize: Number,
+  specialRequirements: String,
+  createdAt: Date
+}
+
+
+⸻
+
+✅ 4. Review Model
+
+{
+  userId: ObjectId,
+  festivalId: ObjectId,
+  rating: Number,
+  comment: String,
+  createdAt: Date
+}
+
+
+⸻
+
+✅ 5. NewsletterSubscription Model (Optional)
+
+{
+  email: String,
+  preferences: [String],
+  subscribedAt: Date
+}
+
+
+⸻
+
+🔐 Authentication & Security
+	•	Email/password + OAuth (Google)
+	•	JWT for token-based auth
+	•	Email verification system
+	•	Password recovery via token
+	•	bcrypt password hashing
+	•	Role-based access (user, admin)
+
+⸻
+
+🧩 Core Backend Features
+
+Feature	Endpoint/Action
+Register/Login	/auth/register, /auth/login
+View/Search Festivals	/festivals, with filters/search
+View Festival Detail	/festivals/:id
+Create/Edit Festival	Admin only: POST / PUT / DELETE /festivals
+Plan Visit	POST /visitPlans
+Manage Visits	GET / PUT / DELETE /visitPlans/:id
+Save Festivals	POST /users/saveFestival/:festivalId
+Leave Reviews	POST /festivals/:id/review
+
+
+⸻
+
+💻 Frontend Breakdown
+
+⚙️ Pages
+
+Page	Features
+Home	Featured festivals, categories, newsletter
+Festival Detail	Overview, image gallery, map, planning
+Hidden Gems	Lesser-known festivals with filters
+Explore Festivals	Search + filters (region, date, type)
+Plan Visit	Form to plan visits
+Login/Register	JWT + OAuth
+User Dashboard	Saved festivals, visit plans
+Admin Dashboard	Manage festivals
+
+
+⸻
+
+🗃️ Filters & Sorting System
+	•	Filter by: date, region, category, popularity
+	•	Sort by: relevance, crowd level, start date
+	•	Search: full-text (festival name, description)
+
+⸻
+
+📦 Tech Integration Notes
+	•	Use MUI for UI consistency
+	•	Use React Context API for user auth state
+	•	Use Axios interceptors for auth headers
+	•	Protect routes using token + role check
+	•	Load map using Google Maps API
+	•	Add weather info using OpenWeatherMap API
+
+⸻
+
+🧪 Testing
+	•	Backend: Jest + Supertest
+	•	Frontend: React Testing Library
+	•	API Testing: Postman
+
+⸻

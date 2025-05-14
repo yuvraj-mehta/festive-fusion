@@ -224,7 +224,7 @@ server/
 ### 2. Development
 
 - Frontend: `npm start` (port 3000)
-- Backend: `npm run dev` (port 5000)
+- Backend: `npm run dev` (port 5001)
 
 ### 3. Building
 

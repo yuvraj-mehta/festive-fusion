@@ -1,5 +1,5 @@
 export interface Festival {
-  _id: string;
+  id: number;
   name: string;
   description: string;
   region: string;
@@ -9,7 +9,7 @@ export interface Festival {
   location: {
     city: string;
     state: string;
-    coordinates?: {
+    coordinates: {
       latitude: number;
       longitude: number;
     };
@@ -41,6 +41,37 @@ export interface Festival {
   isHiddenGem: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface PlannedVisit {
+  id: number;
+  festivalId: number | Festival;
+  userId: string;
+  visitDate: string;
+  groupSize: number;
+  specialRequirements?: string;
+  status: "planned" | "completed" | "cancelled";
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreatePlannedVisitDto {
+  festivalId: number;
+  visitDate: string;
+  groupSize: number;
+  specialRequirements?: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  preferences?: {
+    categories: string[];
+    regions: string[];
+  };
+  plannedVisits?: PlannedVisit[];
+  savedFestivals?: Festival[];
 }
 
 export interface FestivalFilters {

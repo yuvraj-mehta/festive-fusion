@@ -80,7 +80,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigationItems: NavigationItem[] = [
     { label: "Home", path: "/" },
     { label: "Hidden Gems", path: "/hidden-gems" },
-    { label: "Upcoming", path: "/upcoming" },
+    { label: "Upcoming", path: "/upcoming-festivals" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
   ];
@@ -92,17 +92,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           path: "/profile",
           icon: <PersonIcon sx={{ mr: 1 }} />,
         },
-        {
-          label: "Logout",
-          onClick: () => {
-            logout();
-            navigate("/");
-          },
-        },
       ]
     : [
-        { label: "Login", path: "/login" },
-        { label: "Register", path: "/register" },
+        {
+          label: "Account",
+          path: "/login",
+          icon: <PersonIcon sx={{ mr: 1 }} />,
+        },
       ];
 
   const handleDrawerToggle = () => {

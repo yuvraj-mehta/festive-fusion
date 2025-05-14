@@ -29,13 +29,11 @@ const AppRoutes: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/festival/:id" element={<FestivalDetails />} />
         <Route path="/hidden-gems" element={<HiddenGems />} />
-        <Route path="/upcoming" element={<UpcomingFestivals />} />
+        <Route path="/upcoming-festivals" element={<UpcomingFestivals />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/upcoming-festivals" element={<UpcomingFestivals />} />
-        <Route path="/hidden-gems" element={<HiddenGems />} />
 
         {/* Protected routes */}
         <Route
